@@ -1,6 +1,11 @@
 import copy
 import datetime
 import os
+import urllib
+import certifi
+
+os.environ["REQUESTS_CA_BUNDLE"] = certifi.where()
+os.environ["SSL_CERT_FILE"] = certifi.where()
 
 import numpy as np
 import pytorch_lightning as pl
@@ -20,6 +25,9 @@ from tsl.nn.utils import casting
 from tsl.ops.imputation import add_missing_values
 from tsl.utils import parser_utils, numpy_metrics
 from tsl.utils.parser_utils import ArgParser
+
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from spin.baselines import SAITS, TransformerModel, BRITS
 from spin.imputers import SPINImputer, SAITSImputer, BRITSImputer
